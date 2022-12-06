@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link th:href="@{/CSS/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>cost</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.getId()}">
+        <td th:text="${product.getTitle()}"/>
+        <td th:text="${product.getCost()}"/>
+    </tr>
+    </tbody>
+</table>
+<p>Add new product:</p>
+<form method="post" th:action="@{/add}" th:object="${product}">
+    <label for="title">Title:</label>
+    <input id="title" placeholder="Enter title" required type="text" th:field="*{title}"/>
+    <label for="cost">Cost:</label>
+    <input id="cost" placeholder="Enter cost" required type="text" th:field="*{cost}"/>
+    <input type="submit" value="Add Product">
+</form>
+<hr>
+<form method="get" th:action="@{/products}">
+    <p>Find product by id</p>
+    <input id="id" name="prodId" placeholder="Enter id" required type="text" />
+    <input type="submit" value="Find product">
+</form>
+<span th:text="${foundProduct}"></span>
+
+</body>
+</html>
